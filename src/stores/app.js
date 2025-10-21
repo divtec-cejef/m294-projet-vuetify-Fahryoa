@@ -22,7 +22,7 @@ export const useAppStore = defineStore('app', {
     // Déclaration des actions ici
     async fetchRoster () { // Exemple d'action pour récupérer des données depuis une API
       try {
-        const response = await api.get('/v3.1/all', {
+        const response = await api.get('/all', {
           params: {
             fields: 'name,flags,population,area,region,languages,capital,currencies,timezones',
           },

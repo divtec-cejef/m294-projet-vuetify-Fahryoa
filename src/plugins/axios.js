@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: 'https://restcountries.com', // URL directe, pas de proxy
+  baseURL: import.meta.env.VITE_API_BASE_URL, // URL directe, pas de proxy
   timeout: 10_000,
 })
 
