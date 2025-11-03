@@ -24,6 +24,12 @@
           <v-card-title>{{ pays.name.common }}</v-card-title>
           <v-card-text>Capitale : {{ pays.capital[0] }}</v-card-text>
           <v-card-text>Continents : {{ transformerContinentEnFrancais(pays.region) }}</v-card-text>
+          <v-card-actions>
+            <v-btn v-if="pays.favoris" icon='mdi-heart' @click="ajouterEnFavoris(pays)">
+            </v-btn>
+            <v-btn v-else icon='mdi-heart-outline' @click="ajouterEnFavoris(pays)">
+            </v-btn>
+          </v-card-actions>
         </v-card>
       </v-col>
     </v-row>
@@ -58,6 +64,10 @@
       case lesContinents[6].nomAPI: { return lesContinents[6].nomAffichage }
       default: { return 'erreur' }
     }
+  }
+
+  function ajouterEnFavoris (pays) {
+    pays.favoris = pays.favoris != true;
   }
 
   function trierEnFonctionSaisie () {
