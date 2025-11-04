@@ -38,5 +38,9 @@ export const useAppStore = defineStore('app', {
       this.resources = await this.fetchRoster()
       console.log('Ressources initialisées')
     },
+
+    ajouterEnFavoris (pays) {
+      pays.favoris = !pays.favoris
+    },
   },
 })
