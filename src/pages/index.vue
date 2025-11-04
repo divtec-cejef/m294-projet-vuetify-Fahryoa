@@ -1,5 +1,4 @@
 <template>
-  <a href="/Favoris.vue">Voir les favoris</a>
   <h1>Accueil</h1>
   <v-expansion-panels>
     <v-expansion-panel>

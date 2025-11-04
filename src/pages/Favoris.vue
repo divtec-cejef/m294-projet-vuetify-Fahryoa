@@ -1,4 +1,5 @@
 <template>
+  <h1>Favoris</h1>
   <v-container>
     <v-row>
       <v-col
@@ -14,18 +15,18 @@
           <v-card-text>Capitale : {{ pays.capital[0] }}</v-card-text>
           <v-card-text>Continents : {{ transformerContinentEnFrancais(pays.region) }}</v-card-text>
           <v-card-actions>
-            <v-btn v-if="pays.favoris" icon="mdi-heart" @click="ajouterEnFavoris(pays)" />
-            <v-btn v-else icon="mdi-heart-outline" @click="ajouterEnFavoris(pays)" />
+            <v-btn v-if="pays.favoris" icon="mdi-heart" @click="store.ajouterEnFavoris(pays); trierLesFavoris()" />
+            <v-btn v-else icon="mdi-heart-outline" @click="store.ajouterEnFavoris(pays); trierLesFavoris()" />
           </v-card-actions>
         </v-card>
       </v-col>
     </v-row>
   </v-container>
 </template>
-<script setup lang="ts">
+
+<script setup>
   import { ref } from 'vue'
   import { useAppStore } from '@/stores/app.js'
-
   const lesContinents = [
     { nomAPI: 'Tous', nomAffichage: 'Global' },
     { nomAPI: 'Europe', nomAffichage: 'Europe' },
@@ -35,6 +36,8 @@
     { nomAPI: 'Africa', nomAffichage: 'Afrique' },
     { nomAPI: 'Antarctic', nomAffichage: 'Antarctique' },
   ]
+  const saisie = ref('')
+  const continentSaisi = ref(lesContinents[0].nomAPI)
   const lesPays = ref([])
   const store = useAppStore()
 
@@ -50,19 +53,25 @@
     }
   }
 
-  function ajouterEnFavoris (pays) {
-    pays.favoris = pays.favoris != true
-  }
-
-  function trierEnFonctionSaisie () {
+  function trierLesFavoris () {
     lesPays.value = []
 
     for (const pays of store.resources) {
-      lesPays.value.push(pays)
+      if (pays.favoris) {
+        lesPays.value.push(pays)
+      }
     }
   }
-  trierEnFonctionSaisie()
+  trierLesFavoris()
 </script>
-<style scoped>
 
+<style scoped>
+.img {
+  max-height: 45%;
+  margin: 10px;
+}
+
+.cartePays {
+  height: 400px;
+}
 </style>

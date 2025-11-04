@@ -27,7 +27,13 @@ export const useAppStore = defineStore('app', {
             fields: 'name,flags,population,area,region,languages,capital,currencies,timezones',
           },
         })
-        return response.data
+
+        const reponseAvecFavoris = []
+        for (const pays of response.data) {
+          pays.favoris = localStorage.getItem(pays.name.common + '_favoris')
+          reponseAvecFavoris.push(pays)
+        }
+        return reponseAvecFavoris
       } catch (error) {
         return error
       }
@@ -40,6 +46,11 @@ export const useAppStore = defineStore('app', {
     },
 
     ajouterEnFavoris (pays) {
+      if (pays.favoris) {
+        localStorage.removeItem(pays.name.common + '_favoris')
+      } else {
+        localStorage.setItem(pays.name.common + '_favoris', true)
+      }
       pays.favoris = !pays.favoris
     },
   },
