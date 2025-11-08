@@ -26,10 +26,11 @@
           <v-card-actions>
             <v-btn v-if="pays.favoris" icon="mdi-heart" @click="store.ajouterEnFavoris(pays)" />
             <v-btn v-else icon="mdi-heart-outline" @click="store.ajouterEnFavoris(pays)" />
-            <v-card-actions>
-              <v-btn :to="`/Details/${pays.name.common}`">Voir plus</v-btn>
-            </v-card-actions>
-          </v-card-actions></v-card>
+            <v-btn :to="`/${rendreLisiblePourSlug(pays.name.common)}`">
+              Voir plus
+            </v-btn>
+          </v-card-actions>
+        </v-card>
       </v-col>
     </v-row>
   </v-container>
@@ -74,6 +75,15 @@
       }
     }
   }
+
+  function rendreLisiblePourSlug (texte) {
+    return texte
+      .normalize('NFD') // Décomposer les caractères accentués
+      .toLowerCase() // Tout en minuscules
+      .replace(/[\u0300-\u036F]/g, '') // Supprimer les accents
+      .replace(/\s+/g, '-') // Remplacer les espaces par des tirets
+  }
+
   trierEnFonctionSaisie()
 </script>
 

@@ -16,7 +16,6 @@
     <v-main>
       <router-view />
     </v-main>
-    <v-btn @click="logData()">Charger les ressources</v-btn>
   </v-app>
 </template>
 
