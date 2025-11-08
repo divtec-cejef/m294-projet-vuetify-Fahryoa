@@ -1,15 +1,13 @@
 <template>
   <h1>Accueil</h1>
-  <v-expansion-panels>
-    <v-expansion-panel>
-      <v-expansion-panel-title>Continents</v-expansion-panel-title>
-      <v-expansion-panel-text>
-        <v-list v-for="(continent, index) in lesContinents" :key="index">
-          <v-list-item @click="continentSaisi=continent.nomAPI; trierEnFonctionSaisie()">{{ continent.nomAffichage }}</v-list-item>
-        </v-list>
-      </v-expansion-panel-text>
-    </v-expansion-panel>
-  </v-expansion-panels>
+  <v-select
+    v-model="continentSaisi"
+    item-title="nomAffichage"
+    item-value="nomAPI"
+    :items="lesContinents"
+    label="Continents"
+    @update:model-value="trierEnFonctionSaisie()"
+  />
   <v-text-field v-model="saisie" placeholder="Rechercher un pays" @input="trierEnFonctionSaisie()" />
   <v-container>
     <v-row>
@@ -28,8 +26,10 @@
           <v-card-actions>
             <v-btn v-if="pays.favoris" icon="mdi-heart" @click="store.ajouterEnFavoris(pays)" />
             <v-btn v-else icon="mdi-heart-outline" @click="store.ajouterEnFavoris(pays)" />
-          </v-card-actions>
-        </v-card>
+            <v-card-actions>
+              <v-btn :to="`/Details/${pays.name.common}`">Voir plus</v-btn>
+            </v-card-actions>
+          </v-card-actions></v-card>
       </v-col>
     </v-row>
   </v-container>

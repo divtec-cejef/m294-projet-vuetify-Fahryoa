@@ -2,6 +2,11 @@
   <h1>Favoris</h1>
   <v-container>
     <v-row>
+      <v-col v-if="lesPays.length === 0" cols="12" md="12" sm="12">
+        <v-card>
+          <v-card-title>Vous n'avez pas de Favoris</v-card-title>
+        </v-card>
+      </v-col>
       <v-col
         v-for="(pays, index) in lesPays"
         :key="index"
@@ -36,8 +41,6 @@
     { nomAPI: 'Africa', nomAffichage: 'Afrique' },
     { nomAPI: 'Antarctic', nomAffichage: 'Antarctique' },
   ]
-  const saisie = ref('')
-  const continentSaisi = ref(lesContinents[0].nomAPI)
   const lesPays = ref([])
   const store = useAppStore()
 
