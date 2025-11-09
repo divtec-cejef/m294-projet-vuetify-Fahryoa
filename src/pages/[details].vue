@@ -1,12 +1,14 @@
 <template>
-  <v-card class="mx-auto">
-    <v-card-title>{{ pays.name.common }}</v-card-title>
+  <v-card class="carte">
     <v-img :alt="'Drapeau du pays : ' + pays.name.common" class="img" :src="pays.flags.svg" />
+    <v-card-title>{{ pays.name.common }}</v-card-title>
     <v-card-text>Capital : {{ pays.capital[0] }}</v-card-text>
     <v-card-text>Continent : {{ transformerContinentEnFrancais(pays.region) }}</v-card-text>
+    <v-card-text>{{ pays.flags.alt }}</v-card-text>
+    <v-divider />
     <v-card-text>Supérficie : {{ pays.area }}km²</v-card-text>
     <v-card-text>Population : {{ pays.population }} d'habitants</v-card-text>
-    <v-card-text>Langue officielle : {{ pays.languages }}</v-card-text>
+    <v-card-text>Langue officielle : {{ transformerLangue(pays.languages) }}</v-card-text>
     <v-card-text>La monnaie officielle : {{ Object.values(pays.currencies)[0].name }} ({{ Object.values(pays.currencies)[0].symbol }})</v-card-text>
     <v-card-actions>
       <v-btn to="/">
@@ -34,6 +36,10 @@
     { nomAPI: 'Africa', nomAffichage: 'Afrique' },
     { nomAPI: 'Antarctic', nomAffichage: 'Antarctique' },
   ]
+
+  function transformerLangue (langues) {
+    return Object.values(langues).join(', ')
+  }
 
   function transformerContinentEnFrancais (continentATransformer) {
     switch (continentATransformer) {
@@ -68,3 +74,14 @@
 
   rechercherPays()
 </script>
+<style scoped>
+  .img {
+    max-height: 400px;
+    margin-top: 10px;
+  }
+
+  .carte {
+    max-width: 1100px;
+    margin: auto;
+  }
+</style>
