@@ -11,8 +11,10 @@
     <v-card-text>Langue officielle : {{ transformerLangue(pays.languages) }}</v-card-text>
     <v-card-text>La monnaie officielle : {{ Object.values(pays.currencies)[0].name }} ({{ Object.values(pays.currencies)[0].symbol }})</v-card-text>
     <v-card-actions>
+      <v-btn v-if="pays.favoris" icon="mdi-heart" @click="store.ajouterEnFavoris(pays)" />
+      <v-btn v-else icon="mdi-heart-outline" @click="store.ajouterEnFavoris(pays)" />
       <v-btn to="/">
-        Retour
+        Retour a l'accueil
       </v-btn>
     </v-card-actions>
   </v-card>
