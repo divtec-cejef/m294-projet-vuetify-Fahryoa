@@ -17,7 +17,6 @@
 - Fonctionnalité interactive : Il est possible de mettre des pays en favoris
 - Persistance locale : Les favoris sont enregistré via le Local Storage
 
-TODO : 
 ### Aperçu visuel
 _(Capture d’écran de l’application)_  
 ![Screenshot de l’application](/img/screenshotAccueil.png)
