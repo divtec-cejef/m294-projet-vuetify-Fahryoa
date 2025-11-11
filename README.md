@@ -20,8 +20,8 @@
 TODO : 
 ### Aperçu visuel
 _(Capture d’écran de l’application)_  
-`![Screenshot de l’application](img/screenshotAccueil.png)`
-`![Screenshot de l’application](img/screenshotFavoris.png)`
+`![Screenshot de l’application](./img/screenshotAccueil.png)`
+`![Screenshot de l’application](../img/screenshotFavoris.png)`
 `![Screenshot de l’application](img/screenshotDetails.png)`
 
 ---
