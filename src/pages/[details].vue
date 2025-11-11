@@ -25,7 +25,7 @@
   import { useRoute } from 'vue-router'
   import { useAppStore } from '@/stores/app.js'
 
-  // -- Initialisations
+  // initialisation
   const route = useRoute()
   const store = useAppStore()
   const pays = ref(null)
@@ -39,10 +39,20 @@
     { nomAPI: 'Antarctic', nomAffichage: 'Antarctique' },
   ]
 
+  /**
+   * Permet de transformer le tableau des langues en texte qui s'affiche séparé d'une virgule comme ceci : "langue1, langue2, langue3"
+   * @param langues le tableau des langues
+   * @returns {string} Le texte avec les langues séparé de virgule
+   */
   function transformerLangue (langues) {
     return Object.values(langues).join(', ')
   }
 
+  /**
+   * Permet de prendre le nom d'un continent et de le traduire en Français
+   * @param continentATransformer Continent a traduire
+   * @returns {*|string} le nom du pays en français
+   */
   function transformerContinentEnFrancais (continentATransformer) {
     switch (continentATransformer) {
       case lesContinents[1].nomAPI: { return lesContinents[1].nomAffichage }
@@ -55,7 +65,11 @@
     }
   }
 
-  // Fonction utilitaire pour convertir un nom de pays en "slug"
+  /**
+   * Transforme du texte pour qu'il soit "lisible" pour un slug (retire les majuscule, les accents, ...)
+   * @param texte le texte a transformer
+   * @returns {string} le texte "Lisible" pour le slug
+   */
   function rendreLisiblePourSlug (texte) {
     return texte
       .normalize('NFD')
@@ -64,7 +78,9 @@
       .replace(/\s+/g, '-')
   }
 
-  // Recherche du pays correspondant au paramètre d’URL
+  /**
+   * Recherche du pays correspondant au paramètre donnée par l'URL
+   */
   function rechercherPays () {
     const slug = rendreLisiblePourSlug(route.params.details)
     for (const p of store.resources) {

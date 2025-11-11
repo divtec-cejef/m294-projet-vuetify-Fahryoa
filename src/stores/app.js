@@ -29,6 +29,8 @@ export const useAppStore = defineStore('app', {
         })
 
         const reponseAvecFavoris = []
+
+        // permet de récupéré depuis le Local Storage quelle pays sont en favoris
         for (const pays of response.data) {
           pays.favoris = localStorage.getItem(pays.name.common + '_favoris')
           reponseAvecFavoris.push(pays)
@@ -58,6 +60,8 @@ export const useAppStore = defineStore('app', {
           paysArray = data
         }
         const reponseAvecFavoris = []
+
+        // permet de récupéré depuis le Local Storage quelle pays sont en favoris
         for (const pays of paysArray) {
           pays.favoris = localStorage.getItem(pays.name.common + '_favoris')
           reponseAvecFavoris.push(pays)
@@ -79,6 +83,7 @@ export const useAppStore = defineStore('app', {
       console.log('Ressources initialisées')
     },
 
+    // Permet d'ajouter un pokemon en favoris ou le retirer
     ajouterEnFavoris (pays) {
       if (pays.favoris) {
         localStorage.removeItem(pays.name.common + '_favoris')

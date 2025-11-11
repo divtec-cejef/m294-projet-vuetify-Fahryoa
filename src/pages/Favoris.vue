@@ -33,6 +33,7 @@
   import { ref } from 'vue'
   import { useAppStore } from '@/stores/app.js'
 
+  // initialisation
   const lesContinents = [
     { nomAPI: 'Tous', nomAffichage: 'Global' },
     { nomAPI: 'Europe', nomAffichage: 'Europe' },
@@ -47,6 +48,9 @@
   const saisie = ref('')
   const continentSaisi = ref(lesContinents[0].nomAPI)
 
+  /**
+   * Trie les pays pour séléctionner que les favoris et en fonction des saisies utilisateur (recherche et filtre)
+   */
   function trierLesFavoris () {
     lesPays.value = []
 

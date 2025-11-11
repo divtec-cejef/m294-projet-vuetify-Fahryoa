@@ -33,6 +33,7 @@
   import { ref } from 'vue'
   import { useAppStore } from '@/stores/app.js'
 
+  // Les continents avec le nom que leur donne l'API et le nom avec lequel je les affiche
   const lesContinents = [
     { nomAPI: 'Tous', nomAffichage: 'Global' },
     { nomAPI: 'Europe', nomAffichage: 'Europe' },
@@ -42,11 +43,16 @@
     { nomAPI: 'Africa', nomAffichage: 'Afrique' },
     { nomAPI: 'Antarctic', nomAffichage: 'Antarctique' },
   ]
+
+  // initialisation
   const saisie = ref('')
   const continentSaisi = ref(lesContinents[0].nomAPI)
   const lesPays = ref([])
   const store = useAppStore()
 
+  /**
+   * Trie en fonction des recherches et des filtres
+   */
   function trierEnFonctionSaisie () {
     lesPays.value = []
 

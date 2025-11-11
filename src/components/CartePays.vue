@@ -17,16 +17,10 @@
 <script setup>
   import { useAppStore } from '@/stores/app.js'
 
+  // intialisation
   const store = useAppStore()
+  // Créer un évenement dès que le bouton des favoris est cliquer
   const favorisCliquer = defineEmits(['favori-clique'])
-
-  defineProps({
-    pays: {
-      type: Object,
-      required: true,
-    },
-  })
-
   const lesContinents = [
     { nomAPI: 'Tous', nomAffichage: 'Global' },
     { nomAPI: 'Europe', nomAffichage: 'Europe' },
@@ -37,6 +31,19 @@
     { nomAPI: 'Antarctic', nomAffichage: 'Antarctique' },
   ]
 
+  // Définit les propriétés que le composant reçoit du parent. (un pays)
+  defineProps({
+    pays: {
+      type: Object,
+      required: true,
+    },
+  })
+
+  /**
+   * Permet de prendre le nom d'un continent et de le traduire en Français
+   * @param continentATransformer Continent a traduire
+   * @returns {*|string} le nom du pays en français
+   */
   function transformerContinentEnFrancais (continentATransformer) {
     switch (continentATransformer) {
       case lesContinents[1].nomAPI: { return lesContinents[1].nomAffichage }
@@ -49,14 +56,22 @@
     }
   }
 
+  /**
+   * Transforme du texte pour qu'il soit "lisible" pour un slug (retire les majuscule, les accents, ...)
+   * @param texte le texte a transformer
+   * @returns {string} le texte "Lisible" pour le slug
+   */
   function rendreLisiblePourSlug (texte) {
     return texte
-      .normalize('NFD') // Décomposer les caractères accentués
+      .normalize('NFD') // Décomposer les caractères accentués (é = e´)
       .toLowerCase() // Tout en minuscules
       .replace(/[\u0300-\u036F]/g, '') // Supprimer les accents
       .replace(/\s+/g, '-') // Remplacer les espaces par des tirets
   }
 
+  /**
+   * émet l'évenement favorisCliquer
+   */
   function boutonFavCliquer () {
     favorisCliquer('favori-clique')
   }
