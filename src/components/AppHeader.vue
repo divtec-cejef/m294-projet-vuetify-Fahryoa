@@ -17,6 +17,8 @@
         * @click redirige vers la page d'accueil
       -->
       <!-- Titre de l'application affiché dans la barre -->
+      <v-toolbar-title>Paydex</v-toolbar-title>
+
       <v-btn
         v-for="link in menuItems"
         :key="link.title"

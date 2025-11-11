@@ -1,5 +1,5 @@
 <template>
-  <h1>Accueil</h1>
+  <h1 class="text-center">Accueil</h1>
   <v-select
     v-model="continentSaisi"
     item-title="nomAffichage"
@@ -11,6 +11,11 @@
   <v-text-field v-model="saisie" placeholder="Rechercher un pays" @input="trierEnFonctionSaisie()" />
   <v-container>
     <v-row>
+      <v-col v-if="lesPays.length === 0" cols="12" md="12" sm="12">
+        <v-card>
+          <v-card-title>Aucun pays trouvée</v-card-title>
+        </v-card>
+      </v-col>
       <v-col
         v-for="(pays, index) in lesPays"
         :key="index"

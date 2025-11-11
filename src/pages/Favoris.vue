@@ -1,5 +1,5 @@
 <template>
-  <h1>Favoris</h1>
+  <h1 class="text-center">Favoris</h1>
   <v-select
     v-model="continentSaisi"
     item-title="nomAffichage"
