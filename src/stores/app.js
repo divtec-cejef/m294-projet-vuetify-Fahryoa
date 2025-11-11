@@ -39,9 +39,43 @@ export const useAppStore = defineStore('app', {
       }
     },
 
+    // Fonction pour récupéré les pays par un json
+    async fetchPaysFromJSON () {
+      try {
+        const response = await fetch('src/data/pays.json')
+        const data = await response.json()
+        // Si le JSON a la même structure que l'API (data.results), on descend dans "results"
+        // sinon on prend directement le tableau retourné
+        let paysArray = []
+        if (Array.isArray(data)) {
+          // Le JSON est directement un tableau
+          paysArray = data
+        } else if (data && Array.isArray(data.results)) {
+          // Le JSON contient un bojet avec une propriété 'results' qui est le tableau
+          paysArray = data.results
+        } else {
+          // Cas par défault : on affecte la valeur telle quelle
+          paysArray = data
+        }
+        const reponseAvecFavoris = []
+        for (const pays of paysArray) {
+          pays.favoris = localStorage.getItem(pays.name.common + '_favoris')
+          reponseAvecFavoris.push(pays)
+        }
+        this.resources = reponseAvecFavoris
+        console.log('Les pays ont été chargé depuis le JSON :', this.resources)
+      } catch (error) {
+        this.error = error
+        console.log('Erreur fetchPaysFromJSON() :', error)
+      }
+
+      return []
+    },
+
     async init () {
       // Initialisation simple : récupère les données de l'API et les stocke dans this.resources
       this.resources = await this.fetchRoster()
+      // this.fetchPaysFromJSON()
       console.log('Ressources initialisées')
     },
 
